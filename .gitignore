@@ -1,0 +1,16 @@
+node_modules
+dist
+dev-dist
+.DS_Store
+*.local
+.env
+.env.*
+!.env.example
+coverage
+.vite
+artifacts
+test-results
+playwright-report
+output/
+.vercel/
+.playwright-cli/

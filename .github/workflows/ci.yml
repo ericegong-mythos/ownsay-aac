@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Public-source privacy and secret gate
+        run: npm run assert:public
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: TypeScript check
+        run: npx tsc -b
+
+      - name: Unit, component and host-adapter tests (deterministic; no generated WebGPU evidence)
+        run: npm run test:run
+
+      - name: Production build
+        run: npm run build
+
+      - name: Release bundle gate (branding, no simulation hooks, lazy model runtime)
+        run: npm run assert:bundle
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium webkit
+
+      - name: Browser matrix (Chromium + WebKit; deterministic only, no model weights)
+        run: npx playwright test
+
+      - name: npm audit (production dependencies)
+        run: npm audit --omit=dev --audit-level=high

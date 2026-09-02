@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="OwnSay">
+  <rect width="512" height="512" rx="104" fill="#102542"/>
+  <path d="M142 126h246c40 0 72 32 72 72v112c0 40-32 72-72 72h-28l38 58-92-58H142c-40 0-72-32-72-72V198c0-40 32-72 72-72Z" fill="#54B7B0" opacity=".78"/>
+  <path d="M112 90h248c40 0 72 32 72 72v112c0 40-32 72-72 72h-42l46 70-108-70H112c-40 0-72-32-72-72V162c0-40 32-72 72-72Z" fill="#F7F5F0"/>
+  <rect x="104" y="178" width="70" height="70" rx="22" fill="#4F8FD8"/>
+  <rect x="194" y="178" width="70" height="70" rx="22" fill="#EF816B"/>
+  <rect x="284" y="178" width="84" height="70" rx="22" fill="#9A84C8"/>
+</svg>

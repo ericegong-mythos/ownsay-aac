@@ -1,0 +1,415 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 31, 58, 0.28);
+  z-index: 20;
+}
+
+.panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(440px, 100%);
+  overflow: auto;
+  background: var(--tile);
+  border-left: 1px solid var(--line);
+  padding: var(--space-5);
+  padding-bottom: max(var(--space-5), env(safe-area-inset-bottom));
+  z-index: 21;
+  display: grid;
+  align-content: start;
+  gap: var(--space-4);
+}
+
+.header {
+  position: sticky;
+  top: calc(-1 * var(--space-5));
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  align-items: center;
+  margin: calc(-1 * var(--space-5)) calc(-1 * var(--space-5)) var(--space-4);
+  padding: var(--space-5);
+  background: var(--tile);
+  border-bottom: 1px solid var(--line);
+}
+
+.summary {
+  min-height: var(--target);
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 750;
+}
+
+.note {
+  color: var(--muted);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+/* Visible busy state while a restore/erase/delete owns local storage: an
+   announced status line plus disabled, dimmed controls. */
+.busyNote {
+  font-weight: 700;
+  color: var(--ink);
+  background: var(--canvas-deep);
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  padding: var(--space-2) var(--space-3);
+}
+
+.busyNote[role='status'] {
+  margin: 0;
+}
+
+.choice:disabled,
+.button:disabled,
+.close:disabled,
+.profileRow:disabled,
+.quietButton:disabled,
+.wordChip:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.fieldset {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: var(--space-3);
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+}
+
+.guideCard {
+  background: var(--canvas-deep);
+}
+
+.guideSteps {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding-inline-start: 1.4rem;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.legend {
+  font-weight: 700;
+  padding: 0 6px;
+}
+
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.choice {
+  min-height: var(--target);
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--canvas);
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.choice[data-selected='true'] {
+  background: var(--ink);
+  color: #f4f7fb;
+  border-color: var(--ink);
+}
+
+.choice:focus-visible,
+.button:focus-visible,
+.close:focus-visible,
+.profileRow:focus-visible,
+.quietButton:focus-visible,
+.wordChip:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.button {
+  min-height: var(--target);
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--tile);
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.primaryButton {
+  background: var(--ink);
+  color: #f4f7fb;
+  border-color: var(--ink);
+}
+
+.dangerButton {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: #ffffff;
+}
+
+.quietButton {
+  min-height: var(--target);
+  border: none;
+  background: none;
+  color: var(--muted);
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 0.875rem;
+  justify-self: start;
+}
+
+.close {
+  min-width: var(--target);
+  min-height: var(--target);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--tile);
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.inputRow {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.fieldLabel {
+  font-size: 0.875rem;
+  font-weight: 650;
+  color: var(--ink-soft);
+}
+
+.textInput {
+  min-height: var(--target);
+  padding: 0 var(--space-3);
+  font-size: 16px;
+  color: var(--ink);
+  background: var(--canvas);
+  border: 1.5px solid var(--line-strong);
+  border-radius: 12px;
+}
+
+.textInput:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-color: transparent;
+}
+
+.profileList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.profileRow {
+  width: 100%;
+  min-height: var(--target);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  text-align: left;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  background: var(--canvas);
+  cursor: pointer;
+}
+
+.profileRow[data-selected='true'] {
+  border-color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--ink);
+}
+
+.profileName {
+  min-width: 0;
+  max-width: 100%;
+  font-weight: 700;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.profileMeta {
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+.addForm {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.wordList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.wordChip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  max-width: 100%;
+  min-width: 0;
+  min-height: var(--target);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--canvas);
+  font-weight: 650;
+  overflow-wrap: anywhere;
+  white-space: normal;
+  cursor: pointer;
+}
+
+.addWordRow {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.addWordRow .button {
+  justify-self: start;
+}
+
+.wordRoutine {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: #f2f4f7;
+  background: color-mix(in srgb, var(--ink) 7%, white);
+  color: var(--muted);
+  font-size: 0.6875rem;
+  font-weight: 750;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.restoreRow {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-1);
+}
+
+.deviceCheck {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.checkList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+  font-size: 0.875rem;
+  font-weight: 650;
+  color: var(--ink-soft);
+}
+
+.checkList li {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.checkList li::before {
+  content: '';
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--line-strong);
+}
+
+.checkJson {
+  max-height: 220px;
+  overflow: auto;
+  padding: var(--space-2);
+  border-radius: 10px;
+  background: var(--canvas);
+  font-size: 0.75rem;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.fileLabel {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.fileInput {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.fileLabelLocked {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.importBox {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: 1.5px solid var(--ink);
+  border-radius: 12px;
+  background: var(--canvas);
+}
+
+.importTitle {
+  margin: 0;
+  font-weight: 700;
+}
+
+.importLine {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.warningNote {
+  margin: 0;
+  padding: var(--space-2);
+  border-radius: 10px;
+  background: var(--canvas);
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+.errorNote {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 650;
+  color: var(--danger);
+}

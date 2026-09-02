@@ -1,0 +1,163 @@
+.board {
+  display: grid;
+  gap: var(--space-4);
+}
+
+/* Every tile fills its CSS grid track so multi-line labels (Building blocks,
+   Different texture, Finished) produce equal row heights without clipping. */
+.coreGrid > div,
+.nowGrid > div,
+.wordsGrid > div {
+  display: grid;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+}
+
+/* Section markers double as non-colour cues: square = core, pulse dot =
+   right-now, ring = anytime. */
+.coreMark {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  background: var(--ink);
+}
+
+.nowMark {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--world);
+}
+
+.wordsMark {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2.5px solid var(--line-strong);
+  background: transparent;
+}
+
+@media (forced-colors: active) {
+  .coreMark,
+  .nowMark,
+  .wordsMark {
+    forced-color-adjust: none;
+  }
+}
+
+.coreSection,
+.nowSection,
+.wordsSection {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.coreGrid {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+.workspace {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.nowSection {
+  container-type: inline-size;
+}
+
+.nowGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(124px, 1fr));
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-panel);
+  background: rgba(11, 31, 58, 0.05);
+  background: color-mix(in srgb, var(--world) 5%, transparent);
+  box-shadow: inset 0 0 0 1.5px rgba(11, 31, 58, 0.14);
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--world) 14%, transparent);
+}
+
+.wordsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+  gap: var(--space-2);
+}
+
+@container (min-width: 600px) {
+  .nowGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-3);
+    padding: var(--space-4);
+  }
+}
+
+.large .nowGrid {
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+
+.more .wordsGrid {
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+}
+
+/* One quiet settle when the world changes. */
+@media (prefers-reduced-motion: no-preference) {
+  .workspace > section {
+    animation: settle 220ms ease both;
+  }
+
+  .workspace > .wordsSection {
+    animation-delay: 40ms;
+  }
+}
+
+@keyframes settle {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Desktop: the world workspace becomes a considered two-zone composition
+   rather than one stretched row. */
+@media (min-width: 900px) {
+  .workspace {
+    grid-template-columns: minmax(0, 11fr) minmax(0, 9fr);
+    align-items: start;
+  }
+}
+
+@media (max-width: 900px) {
+  /* All eight protected tiles stay visible without horizontal scrolling. */
+  .coreGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 360px) {
+  .coreGrid {
+    gap: var(--space-2);
+  }
+
+  .nowGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .wordsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

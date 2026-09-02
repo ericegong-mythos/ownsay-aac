@@ -1,0 +1,26 @@
+name: Feature request
+description: Propose an improvement to OwnSay's general implementation.
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: Communication or carer need
+      description: Explain the decision or task this feature should support, using fictional examples only.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behaviour
+      description: Describe what should happen, including offline and failure states.
+    validations:
+      required: true
+  - type: textarea
+    id: accessibility
+    attributes:
+      label: Accessibility and authorship impact
+      description: Explain effects on touch, keyboard, switch, screen reader, speech, protected words, and user control.
+    validations:
+      required: true

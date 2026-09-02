@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use OwnSay AAC in research, please cite this software."
+title: "OwnSay AAC: a local-first augmentative and alternative communication web application"
+type: software
+authors:
+  - family-names: Egong
+    given-names: Eric
+repository-code: "https://github.com/ericegong-mythos/ownsay-aac"
+license: MIT
+version: 1.0.0
+date-released: 2026-09-02
+abstract: >-
+  OwnSay AAC is an open-source, local-first communication-board implementation
+  with deterministic offline vocabulary, multiple isolated profiles, explicit
+  speech activation, and optional bounded on-device language-model ranking.

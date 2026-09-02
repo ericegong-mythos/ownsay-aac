@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="OwnSay">
+  <rect width="32" height="32" rx="8" fill="#102542"/>
+  <path d="M7 6h17a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4h-2l3 5-7-5H7a4 4 0 0 1-4-4v-8a4 4 0 0 1 4-4Z" fill="#F7F5F0"/>
+  <rect x="7" y="12" width="4" height="4" rx="1.2" fill="#4F8FD8"/>
+  <rect x="13" y="12" width="4" height="4" rx="1.2" fill="#EF816B"/>
+  <rect x="19" y="12" width="5" height="4" rx="1.2" fill="#9A84C8"/>
+</svg>

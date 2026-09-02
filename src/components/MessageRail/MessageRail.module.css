@@ -1,0 +1,258 @@
+.rail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 252px;
+  gap: var(--space-4);
+  align-items: stretch;
+  padding: var(--space-4);
+  background: var(--tile);
+  border-radius: var(--radius-panel);
+  box-shadow: var(--shadow-raised);
+}
+
+.canvas {
+  display: grid;
+  gap: 6px;
+}
+
+.strip {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  min-height: 88px;
+  padding: var(--space-3);
+  border-radius: var(--radius-control);
+  background: #e9ebea;
+  background: color-mix(in srgb, var(--world) 4%, var(--canvas));
+  box-shadow: inset 0 0 0 1.5px rgba(11, 31, 58, 0.12);
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--world) 12%, transparent);
+}
+
+.empty {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.emptyMark {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #aab3bd;
+  background: color-mix(in srgb, var(--world) 55%, white);
+}
+
+.chip {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 48px;
+  padding: 8px 14px 8px 12px;
+  border: 1.5px solid #a9b2be;
+  border: 1.5px solid color-mix(in srgb, var(--ink) 22%, var(--line));
+  border-radius: var(--radius-chip);
+  background: var(--tile);
+  cursor: pointer;
+  box-shadow: var(--shadow-tile);
+  transition:
+    transform 120ms ease,
+    border-color 120ms ease,
+    background-color 120ms ease;
+}
+
+.chip:hover {
+  border-color: #7e8996;
+  border-color: color-mix(in srgb, var(--ink) 45%, var(--line));
+}
+
+.chip:active {
+  transform: scale(0.95);
+}
+
+.chipDot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--world);
+}
+
+.chipLabel {
+  min-width: 0;
+  font-weight: 800;
+  font-size: 1.0625rem;
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+}
+
+.chipX {
+  width: 13px;
+  height: 13px;
+  color: var(--muted);
+}
+
+.hint {
+  padding-left: 6px;
+  font-size: 0.6875rem;
+  color: var(--muted);
+}
+
+.controls {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: var(--space-2);
+}
+
+.speak {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 76px;
+  border: 0;
+  border-radius: var(--radius-control);
+  background: var(--ink);
+  color: #f5f8fc;
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+  box-shadow: var(--shadow-speak);
+  cursor: pointer;
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease,
+    opacity 120ms ease;
+}
+
+.speakIcon {
+  width: 24px;
+  height: 24px;
+  stroke-width: 2.2;
+}
+
+@media (hover: hover) {
+  .speak:not(:disabled):hover {
+    transform: translateY(-1px);
+  }
+}
+
+.speak:not(:disabled):active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 rgba(6, 18, 34, 0.35);
+}
+
+.speak:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.minorRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+.minorRow .control:first-child {
+  grid-column: 1 / -1;
+}
+
+.control {
+  min-height: var(--target);
+  padding: 0 8px;
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--radius-control);
+  background: transparent;
+  color: var(--ink-soft);
+  font-weight: 700;
+  font-size: 0.8125rem;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color 120ms ease, background-color 120ms ease;
+}
+
+.control:not(:disabled):hover {
+  border-color: var(--ink-soft);
+  background: #f5f7f5;
+  background: color-mix(in srgb, var(--canvas) 60%, white);
+}
+
+.control:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Chips arrive with a quiet pop; killed by prefers-reduced-motion globally. */
+@media (prefers-reduced-motion: no-preference) {
+  .strip > div {
+    animation: chipIn 160ms ease both;
+  }
+}
+
+@keyframes chipIn {
+  from {
+    opacity: 0;
+    transform: translateY(3px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .rail {
+    grid-template-columns: 1fr;
+  }
+
+  .speak {
+    min-height: 72px;
+  }
+}
+
+/* Compact tablet landscape: same rail, tighter rhythm, targets stay ≥44px. */
+@media (min-width: 720px) and (max-height: 660px) {
+  .rail {
+    padding: var(--space-3);
+    gap: var(--space-3);
+  }
+
+  .strip {
+    min-height: 56px;
+    padding: var(--space-2);
+  }
+
+  .chip {
+    min-height: var(--target);
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+
+  .speak {
+    min-height: 56px;
+    font-size: 1.125rem;
+  }
+
+  /* Stop, Delete last and Clear share one row to protect the vertical budget.
+     Labels wrap instead of overlapping; targets stay ≥44px tall. */
+  .minorRow {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .minorRow .control {
+    white-space: normal;
+    line-height: 1.15;
+    padding: 4px 4px;
+    font-size: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+
+  .minorRow .control:first-child {
+    grid-column: auto;
+  }
+}

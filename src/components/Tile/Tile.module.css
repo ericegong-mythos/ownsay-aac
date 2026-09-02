@@ -1,0 +1,228 @@
+.tile {
+  height: 100%;
+  appearance: none;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: var(--target-lg);
+  min-width: var(--target-lg);
+  padding: 12px 8px;
+  border-radius: var(--radius-tile);
+  cursor: pointer;
+  text-align: center;
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease,
+    border-color 120ms ease;
+}
+
+@media (hover: hover) {
+  .tile:hover {
+    transform: translateY(-1px);
+  }
+}
+
+@media (hover: none) {
+  .tile {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+.tile:active {
+  transform: scale(0.96);
+}
+
+/* Consistent icon container across every tile family. */
+.badge {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-badge);
+}
+
+.icon {
+  width: 26px;
+  height: 26px;
+  stroke-width: 2.1;
+}
+
+.label {
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+/* --- Protected core: the stable navy band ----------------------------- */
+
+.core {
+  min-height: 84px;
+  padding-top: 26px;
+  background: var(--tile);
+  border: 1.5px solid #8a97a6;
+  border: 1.5px solid color-mix(in srgb, var(--ink) 28%, var(--line));
+  box-shadow: var(--shadow-tile);
+}
+
+.core .badge {
+  background: var(--ink);
+  color: #ffffff;
+}
+
+.core .label {
+  font-size: 1.0625rem;
+  font-weight: 800;
+}
+
+.provenance {
+  position: absolute;
+  top: 6px;
+  right: 7px;
+  padding: 1px 7px;
+  border: 1px solid #b4bcc7;
+  border: 1px solid color-mix(in srgb, var(--ink) 30%, white);
+  border-radius: 999px;
+  background: #f2f4f7;
+  background: color-mix(in srgb, var(--ink) 6%, white);
+  font-size: 0.5625rem;
+  font-weight: 800;
+  color: var(--ink-soft);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+
+/* --- Right-now world words: larger, accent-tinted ---------------------- */
+
+.context {
+  min-height: 96px;
+  background: #f4f6f9;
+  background: color-mix(in srgb, var(--world) 7%, var(--tile));
+  border: 1.5px solid rgba(11, 31, 58, 0.34);
+  border: 1.5px solid color-mix(in srgb, var(--world) 34%, transparent);
+  box-shadow: var(--shadow-tile);
+}
+
+.context:hover {
+  border-color: rgba(11, 31, 58, 0.62);
+  border-color: color-mix(in srgb, var(--world) 62%, transparent);
+}
+
+.context .badge {
+  background: var(--world);
+  color: #ffffff;
+}
+
+.context .label {
+  font-size: 1.0625rem;
+  font-weight: 750;
+}
+
+/* --- Universal sentence words: quieter companions ---------------------- */
+
+.standard {
+  min-height: 76px;
+  background: var(--tile);
+  border: 1.5px solid var(--line-strong);
+  box-shadow: none;
+}
+
+.standard .badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  background: #f4f6f8;
+  background: color-mix(in srgb, var(--ink) 5%, var(--tile));
+  color: var(--ink-soft);
+}
+
+.standard .icon {
+  width: 22px;
+  height: 22px;
+  stroke-width: 2;
+}
+
+.standard .label {
+  font-size: 0.9375rem;
+  font-weight: 650;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 720px) {
+  .tile {
+    min-width: 0;
+  }
+
+  .context {
+    min-height: 88px;
+  }
+
+  .core {
+    min-height: 76px;
+    padding-top: 24px;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  .label {
+    font-size: 0.9375rem;
+  }
+
+  .core .label {
+    font-size: 1rem;
+  }
+}
+
+/* Normal Fire landscape (e.g. 1024×600): compact rhythm but core tiles keep
+   the required 64px height. */
+@media (min-width: 720px) and (max-height: 660px) {
+  .tile {
+    gap: 6px;
+    padding: 8px 6px;
+  }
+
+  .badge {
+    width: 34px;
+    height: 34px;
+    border-radius: 11px;
+  }
+
+  .icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .core {
+    min-height: 64px;
+    padding-top: 18px;
+  }
+
+  .context {
+    min-height: 76px;
+  }
+
+  .standard {
+    min-height: 56px;
+  }
+
+  .label,
+  .context .label {
+    font-size: 0.9375rem;
+  }
+}
+
+/* Severe reduced-height lanes (browser chrome eats the window): vertical
+   scrolling is allowed and the core may use its 56px compact fallback, but
+   Speak/Stop never leave the reachable flow. */
+@media (min-width: 720px) and (max-height: 545px) {
+  .core {
+    min-height: 56px;
+    padding-top: 15px;
+  }
+}
